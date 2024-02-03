@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 
 import PromptCard from './PromptCard'
+import { set } from 'mongoose'
 
 const PromptCardList = ({data, handleTagClick}) =>{
   return(
@@ -19,21 +20,39 @@ const PromptCardList = ({data, handleTagClick}) =>{
 
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
-  const [posts, setPosts] = useState()
-  const handleSearchChange = (e) => {
+  const [posts, setPosts] = useState();
+  const [searchResults, setSearchResults] = useState();
 
-  }
 
+  const fetchPosts =  async() => {
+    const response = await fetch('/api/prompt');
+    const data = await response.json();
+    setPosts(data);
+  };
+  
   useEffect(() => {
-    const fetchPosts =  async() => {
-      const response = await fetch('/api/prompt');
-      const data = await response.json();
-      setPosts(data);
-    };
-    console.log({posts})
-
-    fetchPosts()
+   fetchPosts();
+   console.log({posts})
   }, []);
+
+  const handleSearchChange = (e) => {
+    setSearchText(e)
+    console.log({searchText})
+    if (searchText === ''){
+      fetchPosts();
+    }else{
+      const results = posts.filter(
+        (post) => 
+        post?.prompt.toLowerCase().includes(searchText.toLowerCase()) ||
+        post?.tag.toLowerCase().includes(searchText.toLowerCase()) ||
+        post?.creator?.username.toLowerCase().includes(searchText.toLowerCase()) 
+        
+        );
+        setPosts(results);
+        console.log({results});
+    }
+   
+  }
 
 
   return (
@@ -43,14 +62,14 @@ const Feed = () => {
           type="text"
           placeholder="Search for a tag or a username"
           value={searchText}
-          onChange={handleSearchChange}
+          onChange={(e) => handleSearchChange(e.target.value)}
           required
           className='search_input peer'
           />
       </form>
 
       <PromptCardList
-      data={posts}
+      data={posts || searchResults}
       handleTagClick={() => {}}
 
       />
