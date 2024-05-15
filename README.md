@@ -41,3 +41,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 -search by username
 [] Implent click on tag
 [] Implement view other profiles
+
+
+create post should not show when signed out
+search by any keywords
+responsiveness of cards
