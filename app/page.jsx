@@ -1,21 +1,39 @@
-import Feed from "@components/Feed"
-
+import Feed from "@components/Feed";
+import Template from "@components/Template";
+import Text from "@components/TextAnimate";
 
 const Home = () => {
   return (
-    <section className="w-full flex-center flex-col">
-        <h1 className="head_text text-center">
-            Discover & share
-            <br className="max-md:hidden" />
-            <span className="orange_gradient text-center">AI-Powered Prompts</span>
-        </h1>
-        <p className="desc text-center">
-            Promptopia is an open-source AI prompting tool for modern world to discover, create and share creative prompts
-        </p>
+    <Template>
+      <section className="relative w-full flex-center flex-col">
+        <div className="flex  justify-between w-full">
+          <img
+            className="hidden md:block w-[40%] h-auto object-cover transform -translate-y-8 "
+            src="/assets/images/clipboard.png"
+            alt="hero 1"
+          />
+          
+          <div className="flex-1 text-center relative md:z-10">
+            <h1 className="head_text">
+              <Text />
+              <span className="orange_gradient">Snippets</span>
+            </h1>
+            <p className="desc">
+              Snippet is a tool for the modern world to discover, create, and share creative code snippets.
+            </p>
+          </div>
 
-        <Feed/>
-    </section>
-  )
-}
+          <img
+            className="hidden md:blockw-[30%] h-auto object-cover transform translate-y-32 "
+            src="/assets/images/hero.png"
+            alt="hero 2"
+          />
+        </div>
 
-export default Home
+        <Feed />
+      </section>
+    </Template>
+  );
+};
+
+export default Home;

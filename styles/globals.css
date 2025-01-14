@@ -8,6 +8,23 @@
   Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
 */
 
+pre {
+  padding: 1rem;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+}
+
+.highlighted-line {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+code {
+  font-family: 'Fira Code', monospace;
+}
+
 .main {
   width: 100vw;
   min-height: 100vh;
@@ -86,11 +103,11 @@
 }
 
 .head_text {
-  @apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl;
+  @apply mt-5 text-5xl font-extrabold leading-[1.15] text-primary sm:text-6xl;
 }
 
 .orange_gradient {
-  @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-primary via-tertiary to-secondary bg-clip-text text-transparent;
 }
 
 .green_gradient {
@@ -117,7 +134,7 @@
   @apply rounded-xl border border-gray-200 bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-5;
 }
 
-.prompt_layout {
+.snippet_layout {
   @apply space-y-6 py-8 sm:columns-2 sm:gap-6 xl:columns-3;
 }
 
@@ -148,9 +165,9 @@
   @apply text-sm font-inter text-gray-700 hover:text-gray-500 font-medium;
 }
 
-/* PromptCard Component */
-.prompt_card {
-  @apply flex-1 break-inside-avoid rounded-lg border border-gray-300 bg-white/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit;
+/* snippetCard Component */
+.snippet_card {
+  @apply flex-1 shadow-md hover:shadow-lg  hover:border-mute   break-inside-avoid rounded-lg border border-gray-300 bg-mute/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit;
 }
 
 .flex-center {
@@ -167,4 +184,15 @@
 
 .flex-between {
   @apply flex justify-between items-center;
+}
+
+
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+}
+  body {
+    @apply bg-white;
+  }
 }

@@ -6,6 +6,7 @@ import { useSearchParams , usePathname } from "next/navigation";
 
 import Profile from "@components/Profile";
 import { useSession } from "next-auth/react";
+import Template from "@components/Template";
 
 
 
@@ -39,11 +40,14 @@ const MyProfile = ({searchParams:{name}}) => {
   }, [userId]);
 
   return (
-    <Profile
-      name={`${name ? name : '...'} `}
-      desc={`Welcome to ${name}'s profile page. Share your exceptional prompts and inspire others with the power of your imagination`}
-      data={myPosts}
-    />
+    <Template>
+      <Profile
+        name={`${name ? name : '...'} `}
+        desc={`Welcome to ${name}'s profile page. Share your exceptional snippets and inspire others with the power of your imagination`}
+        data={myPosts}
+      />
+
+    </Template>
   );
 };
 

@@ -46,3 +46,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 create post should not show when signed out
 search by any keywords
 responsiveness of cards
+
+resource
+[text](https://react-9jwgq1.stackblitz.io)

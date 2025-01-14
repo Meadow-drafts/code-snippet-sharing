@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import Profile from "@components/Profile";
+import Template from "@components/Template";
 
 const MyProfile = () => {
   const router = useRouter();
@@ -24,14 +25,14 @@ const MyProfile = () => {
   }, [session?.user.id]);
 
   const handleEdit = (post) => {
-    router.push(`/update-prompt?id=${post._id}`);
+    router.push(`/update-snippet?id=${post._id}`);
   };
 
   const handleDelete = async (post) => {
-    const hasConfirmed = confirm("Are you sure you want to delete this prompt");
+    const hasConfirmed = confirm("Are you sure you want to delete this snippet?");
     if(hasConfirmed){
         try{
-            await fetch(`/api/prompt/${post._id.toString()}`, {
+            await fetch(`/api/snippet/${post._id.toString()}`, {
                 method: 'DELETE'
             });
 
@@ -44,13 +45,15 @@ const MyProfile = () => {
   };
 
   return (
-    <Profile
-      name='My Profile'
-      desc='Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination'
-      data={myPosts}
-      handleEdit={handleEdit}
-      handleDelete={handleDelete}
-    />
+    <Template>
+      <Profile
+        name='My Profile'
+        desc='Welcome to your personalized profile page. Share your exceptional snippets and inspire others with the power of your imagination'
+        data={myPosts}
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+      />
+    </Template>
   );
 };
 
