@@ -43,7 +43,7 @@
   .title-buttons {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     position: absolute;
     left: 10px;
     top: 50%;

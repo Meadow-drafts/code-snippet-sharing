@@ -2,17 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
-
+import { useRouter } from "next/navigation";
 import Form from "@components/Form";
 import Template from "@components/Template";
 
 const EditSnippet = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  const searchParams = useSearchParams();
-  const snippetId = searchParams.get("id");
-
+  const [isClient, setIsClient] = useState(false); // To check if it's client-side rendering
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({
     language: "",
@@ -23,7 +20,16 @@ const EditSnippet = () => {
   });
 
   useEffect(() => {
+    setIsClient(true); // Make sure it's only running on the client
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return; // Skip execution if not client
+
     const getSnippetDetails = async () => {
+      const snippetId = new URLSearchParams(window.location.search).get("id");
+      if (!snippetId) return;
+
       const response = await fetch(`/api/snippet/${snippetId}`);
       const data = await response.json();
 
@@ -36,14 +42,16 @@ const EditSnippet = () => {
         purpose: data.purpose,
       });
     };
-    if (snippetId) getSnippetDetails();
-  }, [snippetId]);
+
+    getSnippetDetails();
+  }, [isClient, session?.user.id]);
 
   const editSnippet = async (e) => {
     e.preventDefault();
 
     setSubmitting(true);
 
+    const snippetId = new URLSearchParams(window.location.search).get("id");
     if (!snippetId) return alert("Snippet ID not found");
 
     try {
@@ -67,6 +75,8 @@ const EditSnippet = () => {
       setSubmitting(false);
     }
   };
+
+  if (!isClient) return null; // Return null if not client side yet
 
   return (
     <Template>

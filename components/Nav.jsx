@@ -1,40 +1,39 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import { useState, useEffect } from "react"
-import {signIn, signOut, useSession, getProviders} from 'next-auth/react'
-import { get } from "mongoose"
-
-
-
-
+import Link from "next/link";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { get } from "mongoose";
 
 const Nav = () => {
-
-  const {data: session}= useSession();
+  const { data: session } = useSession();
   const [providers, setProviders] = useState(null);
-  const [toggleDropdown, setToggleDropdown] = useState(true)
+  const [toggleDropdown, setToggleDropdown] = useState(true);
 
   // console.log("session",  session?.user)
 
-  useEffect(()=> {
-    const setUpProviders = async()=> {
+  useEffect(() => {
+    const setUpProviders = async () => {
       const response = await getProviders();
 
-      setProviders(response)
-
+      setProviders(response);
     };
 
-     
-    setUpProviders(); 
-  }, [])
+    setUpProviders();
+  }, []);
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
       <Link href="/" className="flex gap-2 flex-center">
-        <Image src="/assets/images/logo.svg" alt="snippet logo" width={30} height={30} className="object-contain" />
-        <p className="logo_text">Snipe</p>
+        <Image
+          src="/assets/images/code.png"
+          alt="snippet logo"
+          width={40}
+          height={30}
+          className="object-contain"
+        />
+        <p className="font-black text-2xl text-primary">Snipe</p>
       </Link>
 
       {/* desktop nav */}
@@ -49,30 +48,27 @@ const Nav = () => {
             </button>
             <Link href="/profile">
               <Image
-              src={session?.user.image}
-              width={37}
-              height={37}
-              className="rounded-full"
-              alt="prfile"
+                src={session?.user.image}
+                width={37}
+                height={37}
+                className="rounded-full"
+                alt="prfile"
               />
-
             </Link>
           </div>
-        ):
-        (
+        ) : (
           <>
             {providers &&
-            Object.values(providers).map((provider) => (
-              <button
-              type="button"
-              key={provider.name}
-              onClick={()=> signIn(provider.id)}
-              className="black_btn"
-              
-              >
+              Object.values(providers).map((provider) => (
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => signIn(provider.id)}
+                  className="black_btn"
+                >
                   Sign In
-              </button>
-            ))}
+                </button>
+              ))}
           </>
         )}
       </div>
@@ -87,54 +83,55 @@ const Nav = () => {
               height={37}
               className="rounded-full"
               alt="profile"
-              onClick={()=> setToggleDropdown((prev) => !prev)}
-              />
-              {toggleDropdown && (
-                <div className="dropdown">
-                  <Link href="/profile"
+              onClick={() => setToggleDropdown((prev) => !prev)}
+            />
+            {toggleDropdown && (
+              <div className="dropdown">
+                <Link
+                  href="/profile"
                   className="dropdown_link"
                   onClick={() => setToggleDropdown(false)}
-                  >
-                      My Profile
-                  </Link>
-                  <Link href="/create-snippet"
+                >
+                  My Profile
+                </Link>
+                <Link
+                  href="/create-snippet"
                   className="dropdown_link"
                   onClick={() => setToggleDropdown(false)}
-                  >
-                      Create Snippet
-                  </Link>
-                  <button
+                >
+                  Create Snippet
+                </Link>
+                <button
                   type="button"
                   onClick={() => {
                     setToggleDropdown(false);
                     signOut();
                   }}
-                  className="mt-5 w-full black_btn">
-                    Sign Out
-                  </button>
-                </div>
-              )}
+                  className="mt-5 w-full black_btn"
+                >
+                  Sign Out
+                </button>
+              </div>
+            )}
           </div>
-        ):
-        (
+        ) : (
           <>
-          {providers &&
-          Object.values(providers).map((provider) => (
-            <button
-            type="button"
-            key={provider.name}
-            onClick={()=> signIn(provider.id)}
-            className="outline_btn"
-            
-            >
-                Sign In
-            </button>
-          ))}
-        </>
+            {providers &&
+              Object.values(providers).map((provider) => (
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => signIn(provider.id)}
+                  className="outline_btn"
+                >
+                  Sign In
+                </button>
+              ))}
+          </>
         )}
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;

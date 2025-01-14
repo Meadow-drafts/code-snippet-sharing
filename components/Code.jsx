@@ -23,11 +23,13 @@ export default function Code({ code, language }) {
   return (
     <div className="window">
       <div className="title-bar">
-        <div className="title-buttons">
-          {/* <div className="title-button"></div>
-          <div className="title-button"></div>
-          <div className="title-button"></div> */}
-          <p className="text-xs">{language}</p>
+        <div className="title-buttons  w-full ">
+          <p className="text-xs capitalize">{language}</p>
+          <div className="flex mr-3">
+            <div className="title-button"></div>
+            <div className="title-button"></div>
+            <div className="title-button"></div>
+          </div>
         </div>
       </div>
       <div className="editor_wrap relative">
@@ -35,7 +37,11 @@ export default function Code({ code, language }) {
           className="copy_btn absolute right-3 cursor-pointer"
           onClick={handleCopy}
         >
-          {copied ? <Check className="cursor-pointer" size={14} /> : <Copy size={14} />}
+          {copied ? (
+            <Check className="cursor-pointer" size={14} />
+          ) : (
+            <Copy size={14} />
+          )}
         </div>
         <Editor
           value={code}
