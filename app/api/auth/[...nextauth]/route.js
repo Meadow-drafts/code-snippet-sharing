@@ -5,6 +5,7 @@ import User from "@models/user";
 import { connectToDB } from "@utils/database";
 
 const handler = NextAuth({
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
@@ -12,7 +13,7 @@ const handler = NextAuth({
       callbackUrl:
         process.env.NODE_ENV === "development"
           ? "http://localhost:3000/api/auth/callback/google"
-          : "https://code-snippet-sharing-ke4owaqbv-meadowdrafts-projects.vercel.app/auth/callback/google",
+          : "https://code-snippet-sharing.vercel.app/auth/callback/google",
     }),
   ],
   callbacks: {
