@@ -103,7 +103,11 @@ const Feed = () => {
     } else {
       const results = posts.filter((post) =>
         ["snippet", "language", "title", "tag", "creator.username"]
-          .map((field) => post[field]?.toLowerCase().includes(debouncedSearchText.toLowerCase()))
+          .map((field) =>
+            post[field]
+              ?.toLowerCase()
+              .includes(debouncedSearchText.toLowerCase())
+          )
           .some(Boolean)
       );
       setSearchResults(results);
@@ -116,7 +120,6 @@ const Feed = () => {
 
   return (
     <section className="feed">
-      
       <form className="relative w-full flex-center">
         <input
           type="text"

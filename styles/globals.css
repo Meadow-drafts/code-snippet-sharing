@@ -95,11 +95,11 @@ code {
 }
 
 .black_btn {
-  @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
+  @apply rounded-full border border-secondary bg-secondary py-1.5 px-5 text-white transition-all hover:bg-white hover:text-secondary text-center text-sm font-inter flex items-center justify-center;
 }
 
 .outline_btn {
-  @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
+  @apply rounded-full border border-secondary bg-transparent py-1.5 px-5 text-secondary transition-all hover:bg-secondary hover:text-white text-center text-sm font-inter flex items-center justify-center;
 }
 
 .head_text {
@@ -167,7 +167,7 @@ code {
 
 /* snippetCard Component */
 .snippet_card {
-  @apply flex-1 shadow-md hover:shadow-lg  hover:border-mute   break-inside-avoid rounded-lg border border-gray-300 bg-mute/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit;
+  @apply flex-1 shadow-md hover:shadow-lg  hover:border-mute   break-inside-avoid rounded-lg border border-gray-300 bg-mute/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-[360px] h-fit;
 }
 
 .flex-center {

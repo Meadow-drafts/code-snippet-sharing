@@ -20,7 +20,7 @@ const RootLayout = ({ children }) => {
             <Nav />
             {children}
           </main>
-            <Footer/>
+          <Footer />
         </Provider>
       </body>
     </html>

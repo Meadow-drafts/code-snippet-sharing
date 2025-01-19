@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
-import { get } from "mongoose";
 
 const Nav = () => {
   const { data: session } = useSession();
@@ -22,6 +21,8 @@ const Nav = () => {
 
     setUpProviders();
   }, []);
+
+  console.log({ session });
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
